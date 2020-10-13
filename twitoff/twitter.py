@@ -18,7 +18,8 @@ nlp = spacy.load(r'C:\Users\sboov\anaconda3\envs\twitoff\Lib\site-packages\en_co
 
 
 def vectorize_tweet(nlp, tweet_text):
-    return nlp(tweet_text).vector
+    '''Returns SpaCy embeddings for input text'''
+    return list(nlp(tweet_text).vector)
 
 
 def add_user_tweepy(username):
@@ -50,7 +51,7 @@ def add_user_tweepy(username):
 
             # Get an example for first tweet
             embedding = vectorize_tweet(nlp, tweet.full_text)
-            
+
             # Add tweet info to Tweet table
             db_tweet = Tweet(id=tweet.id,
                              text=tweet.full_text[:300],

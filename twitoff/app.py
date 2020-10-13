@@ -2,7 +2,7 @@
 from flask import Flask, render_template, request
 from .db_model import DB, User, Tweet
 from .twitter import add_user_tweepy
-#from.predict import 
+#from.predict import predict_user
 
 
 def create_app():
@@ -31,8 +31,18 @@ def create_app():
             print('Error adding {}: {}'.format(name, e))
             tweets = []
 
-        return render_template('user.html', title=name, message=message)
+        return render_template('user.html', title=name, tweets=tweets, message=message)
 
+    @app.route('/reset')
+    def reset():
+        DB.drop_all()
+        DB.create_all()
+        return render_template('base.html', title='Reset Database!', users=User.query.all())
+
+    @app.route('/update', methods=['GET'])
+    def update():
+        update_all_users()
+        return render_template('base.html', title='All Tweets Updated!', users=User.query.all())
 
     return app
 
