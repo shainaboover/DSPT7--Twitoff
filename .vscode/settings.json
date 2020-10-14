@@ -1,3 +1,8 @@
 {
     "python.dataScience.jupyterServerURI": "local"
+    "python.pythonPath": "C:\\Users\\sboov\\anaconda3\\envs\\twitoff",
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint-flask"
+    ]
 }
